@@ -34,7 +34,9 @@ def book_edit(request, book_id=None):
     return render(request, 'cms/book_edit.html', dict(form=form, book_id=book_id))
 
 
-
 def book_del(request, book_id):
     """書籍の削除"""
-    return HttpResponse('書籍の削除')
+    # return HttpResponse('書籍の削除')
+    book = get_object_or_404(Book, pk=book_id)
+    book.delete()
+    return redirect('cms:book_list')
